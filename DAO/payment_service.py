@@ -1,14 +1,12 @@
-from datetime import datetime
-
-class Payment:
-    def __init__(self, payment_id: int, student_id: int, amount: int, payment_date: datetime):
+class PaymentService:
+    def __init__(self, payment_id: int, student_id: int, amount:int, payment_date):
         self.payment_id = payment_id
         self.student_id = student_id
         self.amount = amount
         self.payment_date = payment_date
 
 
-    def set_student(self, student):
+    def set_student(self, student:Students):
         self.student = student
 
     def get_student(self):
@@ -19,3 +17,4 @@ class Payment:
     
     def get_payment_date(self):
         return self.payment_date
+     
