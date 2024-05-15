@@ -5,6 +5,7 @@ from DAO.enrollment_service import EnrollmentService
 from DAO.payment_service import PaymentService
 from DAO.student_service import StudentService
 from DAO.teacher_service import TeacherService
+from Entity import Courses
 
  
  
@@ -27,75 +28,130 @@ class MainMenu:
             2. Assign Teacher
             3. UpdateCourseInfo 
             4.DisplayCourseInfo
-            5.List of students enrolled to the course
-            6.Teachers assigned to course
-            7.AssignTeacherToCourse
-            8.CalculateCourseStatistics
-            9.AssignCourseToTeacher
-            10. Back to main menu
+            5.AssignTeacherToCourse
+            6.CalculateCourseStatistics
+            7.AssignCourseToTeacher
+            8. Back to main menu
                     """
             )
             choice = int(input("Please choose from above options: "))
     
             if choice == 1:
-                title = input("Please enter movie title: ")
-                year = int(input("Please enter movie year: "))
-                director_id = int(input("Please enter movie director's id: "))
-                new_movie = Movie(title, year, director_id)
-                self.course_service.create_course(new_movie)
+                course_id=int(input("Enter course id: "))
+                course_name= input("Enter the course name: ") 
+                credits=int(input("Enter the credits: ")) 
+                teacher_id=int(input("Enter the teacher id: "))
+                new_course = Courses(course_id, course_name, credits, teacher_id)
+                self.course_service.create_course(new_course)
             elif choice == 2:
-                self.course_service.read_movies()
+                course_id=int(input("Enter course id: "))
+                course_name= input("Enter the course name: ") 
+                credits=int(input("Enter the credits: ")) 
+                teacher_id=int(input("Enter the teacher id: "))
+                new_course = Courses(course_id, course_name, credits, teacher_id)
+                self.course_service.assign_teacher(new_course)
             elif choice == 3:
-                movie_id = int(input("Please enter movie's id: "))
-                title = input("Please enter movie title: ")
-                year = int(input("Please enter movie year: "))
-                director_id = int(input("Please enter movie director's id: "))
-                updated_movie = Movie(title, year, director_id)
-                self.course_service.update_movie(updated_movie, movie_id)
+                course_id=int(input("Enter course id: "))
+                credits= int(input("Enter the credits: ") )
+                new_course = Courses(course_id,credits)  
+                self.course_service.update_course(new_course)
             elif choice == 4:
-                movie_id = int(input("Please tell a movie id to delete: "))
-                self.course_service.delete_movie(movie_id)
+                course_id = int(input("Please tell a course id: "))
+                self.course_service.display_course_info(course_id)
             elif choice == 5:
-                movie_id = int(input("Please tell a movie id to delete: "))
-                self.course_service.delete_movie(movie_id) 
+                course_id=int(input("Enter course id: "))
+                course_name= input("Enter the course name: ") 
+                credits=int(input("Enter the credits: ")) 
+                teacher_id=int(input("Enter the teacher id: "))
+                new_course = Courses(course_id, course_name, credits, teacher_id)
+                self.course_service.assign_teacher_to_course(new_course)
             elif choice == 6:
-                movie_id = int(input("Please tell a movie id to delete: "))
-                self.course_service.delete_movie(movie_id)
+                course_id=int(input("Enetr the course id to calculate statistics: ")) 
+                course_name=input("Enter thee course name: ")
+                new_course=Courses(course_id,course_name)
+                self.course_service.calculate_course_statistics(new_course)
             elif choice == 7:
-                movie_id = int(input("Please tell a movie id to delete: "))
-                self.course_service.delete_movie(movie_id) 
+                course_id=int(input("Enter course id: "))
+                course_name= input("Enter the course name: ") 
+                credits=int(input("Enter the credits: ")) 
+                teacher_id=int(input("Enter the teacher id: "))
+                new_course = Courses(course_id, course_name, credits, teacher_id)
+                self.course_service.assign_course_to_teacher(new_course) 
+                              
             elif choice == 8:
-                movie_id = int(input("Please tell a movie id to delete: "))
-                self.course_service.delete_movie(movie_id)
-            elif choice == 9:
-                movie_id = int(input("Please tell a movie id to delete: "))
-                self.course_service.delete_movie(movie_id)                  
-            elif choice == 10:
                 break
     
     
-    def director_menu(self):
-         while True:
+    def enrollment_menu(self):
+        while True:
             print(
                 """      
-            
-            1. View all Movies
-            2. Back to main menu
+            1. EnrollInCourse
+            2. Assign Teacher
+            3. UpdateCourseInfo 
+            4.DisplayCourseInfo
+            5.AssignTeacherToCourse
+            6.CalculateCourseStatistics
+            7.AssignCourseToTeacher
+            8. Back to main menu
                     """
             )
             choice = int(input("Please choose from above options: "))
     
-            
             if choice == 1:
-                self.director_service.read_director()
+                course_id=int(input("Enter course id: "))
+                course_name= input("Enter the course name: ") 
+                credits=int(input("Enter the credits: ")) 
+                teacher_id=int(input("Enter the teacher id: "))
+                new_course = Courses(enrollment_id, student_id, course_id, enrollment_date)
+                self.course_service.create_course(new_course)
             elif choice == 2:
+                course_id=int(input("Enter course id: "))
+                course_name= input("Enter the course name: ") 
+                credits=int(input("Enter the credits: ")) 
+                teacher_id=int(input("Enter the teacher id: "))
+                new_course = Courses(course_id, course_name, credits, teacher_id)
+                self.course_service.assign_teacher(new_course)
+            elif choice == 3:
+                course_id=int(input("Enter course id: "))
+                credits= int(input("Enter the credits: ") )
+                new_course = Courses(course_id,credits)  
+                self.course_service.update_course(new_course)
+            elif choice == 4:
+                course_id = int(input("Please tell a course id: "))
+                self.course_service.display_course_info(course_id)
+            elif choice == 5:
+                course_id=int(input("Enter course id: "))
+                course_name= input("Enter the course name: ") 
+                credits=int(input("Enter the credits: ")) 
+                teacher_id=int(input("Enter the teacher id: "))
+                new_course = Courses(course_id, course_name, credits, teacher_id)
+                self.course_service.assign_teacher_to_course(new_course)
+            elif choice == 6:
+                course_id=int(input("Enetr the course id to calculate statistics: ")) 
+                course_name=input("Enter thee course name: ")
+                new_course=Courses(course_id,course_name)
+                self.course_service.calculate_course_statistics(new_course)
+            elif choice == 7:
+                course_id=int(input("Enter course id: "))
+                course_name= input("Enter the course name: ") 
+                credits=int(input("Enter the credits: ")) 
+                teacher_id=int(input("Enter the teacher id: "))
+                new_course = Courses(course_id, course_name, credits, teacher_id)
+                self.course_service.assign_course_to_teacher(new_course) 
+                              
+            elif choice == 8:
                 break
     
     
     
-    def actor_menu(self):
+    def payment_menu(self):
+
         pass
- 
+    def student_menu(self):
+        pass
+    def teacher_menu(self):
+        pass
  
 # Task 5 - Keep it in loop
 if __name__ == "__main__":
