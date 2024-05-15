@@ -5,11 +5,8 @@ from DAO.enrollment_service import EnrollmentService
 from DAO.payment_service import PaymentService
 from DAO.student_service import StudentService
 from DAO.teacher_service import TeacherService
-from Entity import Courses
-from Entity import Enrollments
-from Entity import Payments
-from Entity import Students
-from Entity import Teacher
+from Entity import Courses,Enrollments,Payments, Students,Teacher
+
 
  
  
