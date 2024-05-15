@@ -35,7 +35,8 @@ class MainMenu:
             5.AssignTeacherToCourse
             6.CalculateCourseStatistics
             7.AssignCourseToTeacher
-            8. Back to main menu
+            8.Assigned Teacher for a course
+            9. Back to main menu
                     """
             )
             choice = int(input("Please choose from above options: "))
@@ -61,7 +62,8 @@ class MainMenu:
                 self.course_service.update_course(new_course)
             elif choice == 4:
                 course_id = int(input("Please tell a course id: "))
-                self.course_service.display_course_info(course_id)
+                new_course = Courses(course_id)  
+                self.course_service.display_course_info(new_course)
             elif choice == 5:
                 course_id=int(input("Enter course id: "))
                 course_name= input("Enter the course name: ") 
@@ -81,6 +83,10 @@ class MainMenu:
                 teacher_id=int(input("Enter the teacher id: "))
                 new_course = Courses(course_id, course_name, credits, teacher_id)
                 self.course_service.assign_course_to_teacher(new_course) 
+            elif choice == 8:
+                course_id=int(input("Enter course id: "))
+                new_course = Courses(course_id)
+                self.course_service.assigned_teacher_course(new_course)     
                               
             elif choice == 8:
                 break
@@ -109,15 +115,15 @@ class MainMenu:
                 student_id=int(input("Enter the student id: "))
                 course_id=int(input("enter the course id: ")) 
                 enrollment_date=int(input("Enter the enrollment date: "))
-                new_course = Courses(enrollment_id, student_id, course_id, enrollment_date)
+                new_course = Enrollments(enrollment_id, student_id, course_id, enrollment_date)
                 self.course_service.enroll_in_course(new_course)
             elif choice == 2:
                 student_id=int(input("Enter the student id: "))
-                new_course = Courses(student_id)
+                new_course = Enrollments(student_id)
                 self.course_service.enrolled_specific_student(new_course)
             elif choice == 3:
                 course_id=int(input("Enter course id: "))
-                new_course = Courses(course_id)  
+                new_course = Enrollments(course_id)  
                 self.course_service.enrolled_specific_course(new_course)
             elif choice == 4:     
                 self.course_service.student_associated_enrollment()
@@ -128,11 +134,11 @@ class MainMenu:
                 student_id=int(input("Enter the student id: "))
                 course_id=int(input("enter the course id: ")) 
                 enrollment_date=int(input("Enter the enrollment date: "))
-                new_course = Courses(enrollment_id, student_id, course_id, enrollment_date)
+                new_course = Enrollments(enrollment_id, student_id, course_id, enrollment_date)
                 self.course_service.enroll_student_in_course(new_course)
             elif choice == 7:
                 course_id=int(input("Enter course id: "))              
-                new_course = Courses(course_id)
+                new_course = Enrollments(course_id)
                 self.course_service.generate_enrollment_report(new_course) 
                               
             elif choice ==8: 
@@ -140,11 +146,12 @@ class MainMenu:
                 student_id=int(input("Enter the student id: "))
                 course_id=int(input("enter the course id: ")) 
                 enrollment_date=int(input("Enter the enrollment date: "))
-                new_course = Courses(enrollment_id, student_id, course_id, enrollment_date)
+                new_course = Enrollments(enrollment_id, student_id, course_id, enrollment_date)
                 self.course_service.add_enrollment(new_course)  
             elif choice ==9:
                 student_id=int(input("Enter the student id: "))
-                self.course_service.get_enrollment_for_student(student_id)                    
+                new_course = Enrollments(student_id)  
+                self.course_service.get_enrollment_for_student(new_course)                    
             elif choice == 10:
                 break
     
@@ -193,7 +200,8 @@ class MainMenu:
                  self.course_service.record_payment()
             elif choice == 6:
                 student_id=int(input("enter the student id: "))
-                self.course_service.payment_report(student_id)
+                new_course = Payments(student_id)  
+                self.course_service.payment_report(new_course)
             elif choice == 7:
                 payment_id=int(input("enter the payment id: "))
                 student_id=int(input("Enter the student id: ")) 
@@ -207,58 +215,67 @@ class MainMenu:
         while True:
             print(
                 """      
-            1. Make Payment
-            2. Get total payment for specific student
-            3. Get Payment amount
-            4.Get Payment date
-            5.Record the payment made by student
-            6.Generate payment report
-            7.Add Payments
-            8. Back to main menu
+            1. Update student info
+            2. Display student info
+            3. Get Payment record for student
+            4. Back to main menu
                     """
             )
             choice = int(input("Please choose from above options: "))
     
             if choice == 1:
-               payment_id=int(input("enter the payment id: "))
                student_id=int(input("Enter the student id: ")) 
-               amount=int(input("Enter the total amount: "))
-               payment_date=input("Enter the payment date: ")
-               new_course = Payments(payment_id ,student_id,amount,payment_date)
-               self.course_service.make_payment(new_course)
+               first_name=input("Enter the first name: ") 
+               last_name=input("Enter the last name: ") 
+               date_of_birth=input("enter the date of birth: ") 
+               email=input("Enter the email address: ")
+               phone_number=input("enter the phone number")
+               new_course = Students(student_id, first_name, last_name, date_of_birth, email, phone_number)
+               self.course_service.update_student_info(new_course)
             elif choice == 2:
                 student_id=int(input("Enter the student id: "))
-                new_course = Payments(student_id)
-                self.course_service.get_payment_student(new_course)
+                new_course = Students(student_id)
+                self.course_service.display_student_info(new_course)
             elif choice == 3:
-                course_id=int(input("Enter course id: "))
-                new_course = Payments(course_id)  
-                self.course_service.payment_student(new_course)
+                student_id=int(input("Enter course id: "))
+                new_course = Students(student_id)  
+                self.course_service.get_payment_record_student(new_course)
             elif choice == 4:
-                course_id=int(input("Enter course id: "))
-                new_course = Payments(course_id)     
-                self.course_service.payment_date(new_course)
-            elif choice == 5:
-                 payment_id=int(input("enter the payment id: "))
-                 student_id=int(input("Enter the student id: ")) 
-                 amount=int(input("Enter the total amount: "))
-                 payment_date=input("Enter the payment date: ")
-                 new_course = Payments(payment_id ,student_id,amount,payment_date)
-                 self.course_service.record_payment()
-            elif choice == 6:
-                student_id=int(input("enter the student id: "))
-                self.course_service.payment_report(student_id)
-            elif choice == 7:
-                payment_id=int(input("enter the payment id: "))
-                student_id=int(input("Enter the student id: ")) 
-                amount=int(input("Enter the total amount: "))
-                payment_date=input("Enter the payment date: ")
-                new_course = Payments(payment_id ,student_id,amount,payment_date)
-                self.course_service.add_payment(new_course)                 
-            elif choice == 8:
                 break
     def teacher_menu(self):
-        pass
+         while True:
+            print(
+                """      
+            1. Update teacher info
+            2. Display teacher info
+            3. Display courses assigned to teacher
+            4.Retrive all courses assigned to  teacher
+            5. Back to main menu
+                    """
+            )
+            choice = int(input("Please choose from above options: "))
+    
+            if choice == 1:
+               teacher_id=int(input("Enter the teacher id: "))
+               first_name=input("enter the first name: ") 
+               last_name=input("Enter the last name: ") 
+               email=input("enter the email: ")
+               new_course = Teacher(teacher_id, first_name, last_name, email)
+               self.course_service.update_teacher_info(new_course)
+            elif choice == 2:
+                teacher_id=int(input("Enter the student id: "))
+                new_course = Teacher(teacher_id)
+                self.course_service.display_teacher_info(new_course)
+            elif choice == 3:
+                teacher_id=int(input("Enter the student id: "))
+                new_course = Teacher(teacher_id)
+                self.course_service.display_courses(new_course)
+            elif choice == 4:
+                teacher_id=int(input("Enter the student id: "))
+                new_course = Teacher(teacher_id)
+                self.course_service.teacher_courses(new_course)    
+            elif choice == 5:
+                break
  
 # Task 5 - Keep it in loop
 if __name__ == "__main__":
