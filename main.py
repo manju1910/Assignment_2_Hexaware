@@ -87,58 +87,47 @@ class MainMenu:
             print(
                 """      
             1. EnrollInCourse
-            2. Assign Teacher
-            3. UpdateCourseInfo 
-            4.DisplayCourseInfo
-            5.AssignTeacherToCourse
-            6.CalculateCourseStatistics
-            7.AssignCourseToTeacher
+            2. Get Enrolled Course to specific student
+            3. Get Enrollment for specific course 
+            4.Student Associated with the enrollment
+            5.Course Associated with the enrollment
+            6.Enroll Student In Course
+            7.Generate Enrollments report
             8. Back to main menu
                     """
             )
             choice = int(input("Please choose from above options: "))
     
             if choice == 1:
-                course_id=int(input("Enter course id: "))
-                course_name= input("Enter the course name: ") 
-                credits=int(input("Enter the credits: ")) 
-                teacher_id=int(input("Enter the teacher id: "))
+                enrollment_id=int(input("Enter the enrollment id: "))
+                student_id=int(input("Enter the student id: "))
+                course_id=int(input("enter the course id: ")) 
+                enrollment_date=int(input("Enter the enrollment date: "))
                 new_course = Courses(enrollment_id, student_id, course_id, enrollment_date)
-                self.course_service.create_course(new_course)
+                self.course_service.enroll_in_course(new_course)
             elif choice == 2:
-                course_id=int(input("Enter course id: "))
-                course_name= input("Enter the course name: ") 
-                credits=int(input("Enter the credits: ")) 
-                teacher_id=int(input("Enter the teacher id: "))
-                new_course = Courses(course_id, course_name, credits, teacher_id)
-                self.course_service.assign_teacher(new_course)
+                student_id=int(input("Enter the student id: "))
+                new_course = Courses(student_id)
+                self.course_service.enrolled_specific_student(new_course)
             elif choice == 3:
                 course_id=int(input("Enter course id: "))
-                credits= int(input("Enter the credits: ") )
-                new_course = Courses(course_id,credits)  
-                self.course_service.update_course(new_course)
-            elif choice == 4:
-                course_id = int(input("Please tell a course id: "))
-                self.course_service.display_course_info(course_id)
+                new_course = Courses(course_id)  
+                self.course_service.enrolled_specific_course(new_course)
+            elif choice == 4:     
+                self.course_service.student_associated_enrollment()
             elif choice == 5:
-                course_id=int(input("Enter course id: "))
-                course_name= input("Enter the course name: ") 
-                credits=int(input("Enter the credits: ")) 
-                teacher_id=int(input("Enter the teacher id: "))
-                new_course = Courses(course_id, course_name, credits, teacher_id)
-                self.course_service.assign_teacher_to_course(new_course)
+                 self.course_service.course_associated_enrollment()
             elif choice == 6:
-                course_id=int(input("Enetr the course id to calculate statistics: ")) 
-                course_name=input("Enter thee course name: ")
-                new_course=Courses(course_id,course_name)
-                self.course_service.calculate_course_statistics(new_course)
+                enrollment_id=int(input("Enter the enrollment id: "))
+                student_id=int(input("Enter the student id: "))
+                course_id=int(input("enter the course id: ")) 
+                enrollment_date=int(input("Enter the enrollment date: "))
+                new_course = Courses(enrollment_id, student_id, course_id, enrollment_date)
+                self.course_service.enroll_student_in_course(new_course)
             elif choice == 7:
-                course_id=int(input("Enter course id: "))
-                course_name= input("Enter the course name: ") 
-                credits=int(input("Enter the credits: ")) 
-                teacher_id=int(input("Enter the teacher id: "))
-                new_course = Courses(course_id, course_name, credits, teacher_id)
-                self.course_service.assign_course_to_teacher(new_course) 
+                course_id=int(input("Enter course id: "))              
+                new_course = Courses(course_id)
+                self.course_service.generate_enrollment_report(new_course) 
                               
             elif choice == 8:
                 break
