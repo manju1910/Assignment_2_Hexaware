@@ -22,14 +22,14 @@ class Main:
                 enrollment_service = EnrollmentServiceImpl()
                 teacher_service = TeacherServiceImpl()
                 payment_service= PaymentServiceImpl()
-                print("Welcome to Student Information System!!!")
+                print("Welcome to  the Student Information System 🎇")
                 print("Select option to use functionalities: ")
                 print("1.Student\n2.Course\n3.Enrollment\n4.Teacher\n5.Payment\n6.Exit")
                 choice = int(input("Enter your choice: "))
                 if choice in range(1, 7):
                     if choice == 1:
                         while True:
-                            print('''1.enroll student\n2.Update student\n3.Get Student\n4.Delete Student
+                            print('''1.enroll  a new student\n2.Update student\n3.Get Student\n4.Delete Student
                                     5.Get all students\n6.Exit''')
                             choice_1 = int(input("Enter your Choice: "))
                             if choice_1 in range(1, 7):

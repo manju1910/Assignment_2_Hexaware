@@ -29,7 +29,7 @@ class StudentServiceImpl(StudentDAO):
         stmt = self.conn.cursor()
         stmt = self.conn.cursor()
         stmt.execute(
-            "INSERT INTO students (first_name, last_name, date_of_birth, email, phone_number) VALUES (%s, %s, %s, %s, %s)",
+            "INSERT INTO students (first_name, last_name, date_of_birth, email, phone_number) VALUES (?, ?, ?, ?, ?)",
             (first_name, last_name, date_of_birth, email, phone_number))
         self.conn.commit()
         print("student added successfully!")
@@ -45,7 +45,7 @@ class StudentServiceImpl(StudentDAO):
         phone_number = str(phone_number)
         stmt = self.conn.cursor()
         stmt.execute(
-            "UPDATE students SET first_name=%s, last_name=%s, date_of_birth=%s, email=%s, phone_number=%s WHERE student_id=%s",
+            "UPDATE students SET first_name=?, last_name=?, date_of_birth=?, email=?, phone_number=? WHERE student_id=?",
             (first_name, last_name, date_of_birth, email, phone_number, student_id))
         self.conn.commit()
         print("student updated successfully!")
@@ -56,7 +56,7 @@ class StudentServiceImpl(StudentDAO):
             print("Searching for student with ID:", student_id)
 
             stmt = self.conn.cursor()
-            stmt.execute("SELECT * FROM students WHERE student_id = %s", (student_id,))
+            stmt.execute("SELECT * FROM students WHERE student_id = ?", (student_id,))
             print("SQL query executed successfully")
 
             row = stmt.fetchone()
@@ -76,7 +76,7 @@ class StudentServiceImpl(StudentDAO):
     def delete_student(self):
         student_id=int(input("Enter student_id :"))
         stmt = self.conn.cursor()
-        stmt.execute("DELETE FROM students WHERE student_id= %s ", (student_id,))
+        stmt.execute("DELETE FROM students WHERE student_id= ? ", (student_id,))
         self.conn.commit()
         print("student deleted successfully!")
 
@@ -121,7 +121,7 @@ class CourseServiceImpl(CourseDAO):
         if not course_name or credits <= 0:
             raise InvalidCourseDataException("Course name is required and credits should be a positive number.")
         stmt = self.conn.cursor()
-        stmt.execute("INSERT INTO courses VALUES (%s, %s, %s, %s)",
+        stmt.execute("INSERT INTO courses VALUES (?, ?, ?, ?)",
                             (course_id,course_name,teacher_id,credits))
         self.conn.commit()
         print("course added successfully!")
@@ -133,7 +133,7 @@ class CourseServiceImpl(CourseDAO):
         credits = int(input("Enter credits :"))
         course_id = int(input("Enter course_id :"))
         stmt = self.conn.cursor()
-        stmt.execute("UPDATE courses SET course_name=%s, teacher_id=%s, credits=%s WHERE course_id=%s",
+        stmt.execute("UPDATE courses SET course_name=?, teacher_id=?, credits=? WHERE course_id=?",
                      (course_name,teacher_id,credits,course_id))
         self.conn.commit()
         print("course updated successfully!")
@@ -144,7 +144,7 @@ class CourseServiceImpl(CourseDAO):
             print("Searching for course with ID:", course_id)
 
             stmt = self.conn.cursor()
-            stmt.execute("SELECT * FROM courses WHERE course_id = %s", (course_id,))
+            stmt.execute("SELECT * FROM courses WHERE course_id = ?", (course_id,))
             print("SQL query executed successfully")
 
             row = stmt.fetchone()
@@ -170,7 +170,7 @@ class CourseServiceImpl(CourseDAO):
     def delete_course(self):
         course_id=int(input("Enter course_id :"))
         stmt = self.conn.cursor()
-        stmt.execute("DELETE FROM courses WHERE course_id= %s", (course_id,))
+        stmt.execute("DELETE FROM courses WHERE course_id= ?", (course_id,))
         self.conn.commit()
         print("course deleted successfully!")
 
@@ -212,12 +212,12 @@ class EnrollmentServiceImpl(EnrollmentDAO):
         if not enrollment_date:
             raise InvalidEnrollmentDataException("Enrollment date is required.")
         stmt = self.conn.cursor()
-        stmt.execute("SELECT * FROM enrollments WHERE student_id = %s AND course_id = %s", (student_id, course_id))
+        stmt.execute("SELECT * FROM enrollments WHERE student_id = ? AND course_id = ?", (student_id, course_id))
         existing = stmt.fetchone()
         if existing:
             raise DuplicateEnrollmentException("Student is already enrolled in the course.")
 
-        stmt.execute("INSERT INTO enrollments (student_id, course_id, enrollment_date) VALUES (%s, %s, %s)",
+        stmt.execute("INSERT INTO enrollments (student_id, course_id, enrollment_date) VALUES (?, ?, ?)",
                      (student_id,course_id,enrollment_date))
         self.conn.commit()
         print("enrollment added successfully!")
@@ -228,7 +228,7 @@ class EnrollmentServiceImpl(EnrollmentDAO):
         enrollment_date=input("Enter enrollment date :")
         enrollment_id=int(input("Enter enrollment id :"))
         stmt = self.conn.cursor()
-        stmt.execute("UPDATE enrollments SET student_id= %s, course_id=%s, enrollment_date=%s WHERE enrollment_id=%s",
+        stmt.execute("UPDATE enrollments SET student_id= ?, course_id=?, enrollment_date=? WHERE enrollment_id=?",
                             (student_id,course_id,enrollment_date,enrollment_id))
         self.conn.commit()
         print("enrollment updated successfully!")
@@ -237,7 +237,7 @@ class EnrollmentServiceImpl(EnrollmentDAO):
     def get_enrollment(self):
         enrollment_id = int(input("Enter enrollment id :"))
         stmt = self.conn.cursor()
-        stmt.execute("SELECT * FROM enrollments WHERE enrollment_id= %s", (enrollment_id,))
+        stmt.execute("SELECT * FROM enrollments WHERE enrollment_id= ?", (enrollment_id,))
         row = stmt.fetchone()
         if row:
             enrollment_id,student_id,course_id,enrollment_date = row
@@ -252,7 +252,7 @@ class EnrollmentServiceImpl(EnrollmentDAO):
     def delete_enrollment(self):
         enrollment_id=int(input("Enter Enrollment id :"))
         stmt = self.conn.cursor()
-        stmt.execute("DELETE FROM enrollments WHERE enrollment_id= %s", (enrollment_id,))
+        stmt.execute("DELETE FROM enrollments WHERE enrollment_id= ?", (enrollment_id,))
         self.conn.commit()
         print("enrollment deleted successfully!")
 
@@ -294,7 +294,7 @@ class TeacherServiceImpl(TeacherDAO):
         if not first_name or not last_name or not email:
             raise InvalidTeacherDataException("First name, last name, and email are required.")
         stmt = self.conn.cursor()
-        stmt.execute("INSERT INTO teacher (first_name, last_name, email) VALUES (%s,%s, %s)",
+        stmt.execute("INSERT INTO teacher (first_name, last_name, email) VALUES (?,?, ?)",
                      (first_name,last_name,email))
         self.conn.commit()
         print("teacher added successfully!")
@@ -305,7 +305,7 @@ class TeacherServiceImpl(TeacherDAO):
         email = input("Enter email :")
         teacher_id=int(input("Enter teacher id :"))
         stmt = self.conn.cursor()
-        stmt.execute("UPDATE teacher SET first_name= %s, last_name= %s, email= %s WHERE teacher_id= %s",
+        stmt.execute("UPDATE teacher SET first_name= ?, last_name= ?, email= ? WHERE teacher_id= ?",
                             (first_name,last_name,email,teacher_id))
         self.conn.commit()
         print("teacher updated successfully!")
@@ -315,7 +315,7 @@ class TeacherServiceImpl(TeacherDAO):
         try:
             teacher_id=int(input("Enter teacher id :"))
             stmt = self.conn.cursor()
-            stmt.execute("SELECT * FROM teacher WHERE teacher_id= %s", (teacher_id,))
+            stmt.execute("SELECT * FROM teacher WHERE teacher_id= ?", (teacher_id,))
             row = stmt.fetchone()
             if row:
                 teacher_id,first_name,last_name,email = row
@@ -336,7 +336,7 @@ class TeacherServiceImpl(TeacherDAO):
     def delete_teacher(self):
         teacher_id=int(input("Enter teacher id :"))
         stmt = self.conn.cursor()
-        stmt.execute("DELETE FROM teacher WHERE teacher_id= %s", (teacher_id,))
+        stmt.execute("DELETE FROM teacher WHERE teacher_id= ?", (teacher_id,))
         self.conn.commit()
         print("teacher deleted successfully!")
 
@@ -381,7 +381,7 @@ class PaymentServiceImpl(PaymentDAO):
         if amount <= 0:
             raise PaymentValidationException("Amount must be positive")
         stmt = self.conn.cursor()
-        stmt.execute("INSERT INTO payments VALUES (%s, %s, %s, %s)",
+        stmt.execute("INSERT INTO payments VALUES (?, ?, ?, ?)",
                             (payment_id, student_id,amount,payment_date))
         self.conn.commit()
         print("payment added successfully!")
@@ -392,7 +392,7 @@ class PaymentServiceImpl(PaymentDAO):
         payment_date=input("Enter date :")
         payment_id=int(input("Enter payment ID :"))
         stmt = self.conn.cursor()
-        stmt.execute("UPDATE payments SET student_id= %s, amount= %s, payment_date= %s WHERE payment_id=%s",
+        stmt.execute("UPDATE payments SET student_id= ?, amount= ?, payment_date= ? WHERE payment_id=?",
                             (student_id,amount,payment_date,payment_id))
         self.conn.commit()
         print("payment updated successfully!")
@@ -401,7 +401,7 @@ class PaymentServiceImpl(PaymentDAO):
     def get_payment(self) -> None:
         payment_id=int(input("Enter payment ID :"))
         stmt = self.conn.cursor()
-        stmt.execute("SELECT * FROM payments WHERE payment_id= %s", (payment_id,))
+        stmt.execute("SELECT * FROM payments WHERE payment_id= ?", (payment_id,))
         row = stmt.fetchone()
         if row:
             payment_id,student_id,amount,payment_date= row
@@ -419,7 +419,7 @@ class PaymentServiceImpl(PaymentDAO):
     def delete_payment(self):
         payment_id=int(input("Enter payment Id :"))
         stmt = self.conn.cursor()
-        stmt.execute("DELETE FROM payments WHERE payment_id= %s", (payment_id,))
+        stmt.execute("DELETE FROM payments WHERE payment_id= ?", (payment_id,))
         self.conn.commit()
         print("payment deleted successfully!")
 
