@@ -1,3 +1,0 @@
-class TeacherService:
-  
-    pass
