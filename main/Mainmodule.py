@@ -25,7 +25,7 @@ class Main:
                 print("Welcome to  the Student Information System 🎇")
                 print("Select option to use functionalities: ")
                 print("1.Student\n2.Course\n3.Enrollment\n4.Teacher\n5.Payment\n6.Exit")
-                choice = int(input("Enter your choice: "))
+                choice = int(input("Enter the choice: "))
                 if choice in range(1, 7):
                     if choice == 1:
                         while True:
