@@ -50,7 +50,7 @@ class Main:
                     elif choice == 2:
                         while True:
                             print('''1.add course\n2.update course\n3.get course\n4.delete course
-5.get all courses\n6.Exit''')
+                                   5.get all courses\n6.Exit''')
                             choice_2 = int(input("Enter your Choice: "))
                             if choice_2 in range(1, 7):
                                 if choice_2 == 1:
@@ -110,7 +110,7 @@ class Main:
                     elif choice == 5:
                         while True:
                             print('''1.add payment\n2.Update payment\n3.get payment\n4.delete payment
-                                          5.get all payments\n6.Exit''')
+                                      5.get all payments\n6.Exit''')
                             choice_5 = int(input("Enter your Choice: "))
                             if choice_5 in range(1, 7):
                                 if choice_5 == 1:

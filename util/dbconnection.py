@@ -6,13 +6,13 @@ class Dbconnection:
             conn_str = PropertyUtil.get_property_string()
             self.conn = pyodbc.connect(conn_str)
             self.stmt = self.conn.cursor()
-            print('Database connected..')
+            print('Database connected Successfully 👍')
         except Exception as e:
-            print(str(e) + '---Database Not Connected:--')
+            print(str(e) + '---Database Not Connected ❌')
 
     def close(self):
         self.conn.close()
-        print('Connection Closed:')
+        print('Connection Closed ❗')
 
 
 class PropertyUtil:
@@ -31,5 +31,5 @@ class PropertyUtil:
 
 obj = Dbconnection()
 obj.open()
-# Perform database operations here
+
 obj.close()
