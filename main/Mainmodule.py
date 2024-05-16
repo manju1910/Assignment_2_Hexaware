@@ -30,7 +30,7 @@ class Main:
                     if choice == 1:
                         while True:
                             print('''1.enroll student\n2.Update student\n3.Get Student\n4.Delete Student
-5.Get all students\n6.Exit''')
+                                    5.Get all students\n6.Exit''')
                             choice_1 = int(input("Enter your Choice: "))
                             if choice_1 in range(1, 7):
                                 if choice_1 == 1:
@@ -70,7 +70,7 @@ class Main:
                     elif choice == 3:
                         while True:
                             print('''1.add enrollments\n2.update enrollments\n3.get enrollments\n4.delete enrollments
-5.get all enrollments\n6.Exit''')
+                                    5.get all enrollments\n6.Exit''')
                             choice_3 = int(input("Enter your Choice: "))
                             if choice_3 in range(1, 7):
                                 if choice_3 == 1:
@@ -90,7 +90,7 @@ class Main:
                     elif choice == 4:
                         while True:
                             print('''1.add teacher\n2.Update teacher\n3.get teacher\n4.delete teacher
-5.get all teachers\n6.Exit''')
+                                      5.get all teachers\n6.Exit''')
                             choice_4 = int(input("Enter your Choice: "))
                             if choice_4 in range(1, 7):
                                 if choice_4 == 1:
@@ -110,7 +110,7 @@ class Main:
                     elif choice == 5:
                         while True:
                             print('''1.add payment\n2.Update payment\n3.get payment\n4.delete payment
-5.get all payments\n6.Exit''')
+                                          5.get all payments\n6.Exit''')
                             choice_5 = int(input("Enter your Choice: "))
                             if choice_5 in range(1, 7):
                                 if choice_5 == 1:
