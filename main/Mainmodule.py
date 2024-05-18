@@ -1,11 +1,14 @@
-from dao.servicesImpl import StudentServiceImpl, CourseServiceImpl, EnrollmentServiceImpl, TeacherServiceImpl, PaymentServiceImpl
-from Exception.myexceptions import InvalidDataException
+import sys
+sys.path.append('C:\\Users\\Manju\\Desktop\\Assignment_2_Hexaware')
+from Entity.Student import Student
 from Entity.Student import Student
 from Entity.Course import Course
 from Entity.Enrollment import Enrollment
 from Entity.Payment import Payment
 from Entity.Teacher import Teacher
 from datetime import datetime
+from Exception.myexceptions import InvalidDataException
+from dao.servicesImpl import CourseServiceImpl, EnrollmentServiceImpl, PaymentServiceImpl, StudentServiceImpl, TeacherServiceImpl
 
 
 
@@ -29,8 +32,7 @@ class Main:
                 if choice in range(1, 7):
                     if choice == 1:
                         while True:
-                            print('''1.enroll  a new student\n2.Update student\n3.Get Student\n4.Delete Student
-                                    5.Get all students\n6.Exit''')
+                            print('''1.enroll  a new student\n2.Update student\n3.Get Student\n4.Delete Student\n5.Get all students\n6.Exit''')
                             choice_1 = int(input("Enter your Choice: "))
                             if choice_1 in range(1, 7):
                                 if choice_1 == 1:
@@ -49,8 +51,7 @@ class Main:
                                 raise InvalidDataException("Input should be between 1 and 6")
                     elif choice == 2:
                         while True:
-                            print('''1.add course\n2.update course\n3.get course\n4.delete course
-                                   5.get all courses\n6.Exit''')
+                            print('''1.add course\n2.update course\n3.get course\n4.delete course\n5.get all courses\n6.Exit''')
                             choice_2 = int(input("Enter your Choice: "))
                             if choice_2 in range(1, 7):
                                 if choice_2 == 1:
@@ -69,8 +70,7 @@ class Main:
                                 raise InvalidDataException("Input should be between 1 and 6")
                     elif choice == 3:
                         while True:
-                            print('''1.add enrollments\n2.update enrollments\n3.get enrollments\n4.delete enrollments
-                                    5.get all enrollments\n6.Exit''')
+                            print('''1.add enrollments\n2.update enrollments\n3.get enrollments\n4.delete enrollments\n5.get all enrollments\n6.Exit''')
                             choice_3 = int(input("Enter your Choice: "))
                             if choice_3 in range(1, 7):
                                 if choice_3 == 1:
@@ -89,8 +89,7 @@ class Main:
                                 raise InvalidDataException("Input should be between 1 and 6")
                     elif choice == 4:
                         while True:
-                            print('''1.add teacher\n2.Update teacher\n3.get teacher\n4.delete teacher
-                                      5.get all teachers\n6.Exit''')
+                            print('''1.add teacher\n2.Update teacher\n3.get teacher\n4.delete teacher\n5.get all teachers\n6.Exit''')
                             choice_4 = int(input("Enter your Choice: "))
                             if choice_4 in range(1, 7):
                                 if choice_4 == 1:
@@ -109,8 +108,7 @@ class Main:
                                 raise InvalidDataException("Input should be between 1 and 6")
                     elif choice == 5:
                         while True:
-                            print('''1.add payment\n2.Update payment\n3.get payment\n4.delete payment
-                                      5.get all payments\n6.Exit''')
+                            print('''1.add payment\n2.Update payment\n3.get payment\n4.delete payment\n5.get all payments\n6.Exit''')
                             choice_5 = int(input("Enter your Choice: "))
                             if choice_5 in range(1, 7):
                                 if choice_5 == 1:
