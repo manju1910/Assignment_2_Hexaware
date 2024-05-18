@@ -6,15 +6,7 @@ from Entity import Course, Enrollment, Teacher, Payment,Student
 
 
 class StudentServiceImpl(StudentDAO,Dbconnection):
-    def __init__(self):
-        server_name = "DESKTOP-0EUUQEO\\SQLEXPRESS"
-        database_name = "SISDB"
-        conn_str = (
-            f"Driver={{SQL Server}};"
-            f"Server={server_name};"
-            f"Database={database_name};"
-            f"Trusted_Connection=yes;"
-        )
+
     def add_student(self):
         first_name = input("Enter first name: ")
         last_name = input("Enter last name: ")
@@ -25,9 +17,6 @@ class StudentServiceImpl(StudentDAO,Dbconnection):
             raise InvalidStudentDataException("All fields are required.")
         date_of_birth = str(date_of_birth)
         phone_number = str(phone_number)
-
-        self.conn.cursor()
-        self.conn.cursor()
         self.cursor.execute(
             "INSERT INTO students (first_name, last_name, date_of_birth, email, phone_number) VALUES (?, ?, ?, ?, ?)",
             (first_name, last_name, date_of_birth, email, phone_number))
@@ -43,7 +32,7 @@ class StudentServiceImpl(StudentDAO,Dbconnection):
         phone_number = input("Enter updated phone number: ")
         date_of_birth = str(date_of_birth)
         phone_number = str(phone_number)
-        self.conn.cursor()
+     
         self.cursor.execute(
             "UPDATE students SET first_name=?, last_name=?, date_of_birth=?, email=?, phone_number=? WHERE student_id=?",
             (first_name, last_name, date_of_birth, email, phone_number, student_id))
@@ -55,7 +44,7 @@ class StudentServiceImpl(StudentDAO,Dbconnection):
             student_id = int(input("Enter student_id: "))
             print("Searching for student with ID:", student_id)
 
-            self.conn.cursor()
+         
             self.conn.execute("SELECT * FROM students WHERE student_id = ?", (student_id,))
             print("SQL query executed successfully")
 
@@ -75,14 +64,14 @@ class StudentServiceImpl(StudentDAO,Dbconnection):
 
     def delete_student(self):
         student_id=int(input("Enter student_id :"))
-        self.conn.cursor()
+
         self.conn.execute("DELETE FROM students WHERE student_id= ? ", (student_id,))
         self.conn.commit()
         print("student deleted successfully!")
 
     def get_all_students(self):
         try:
-            self.conn.cursor()
+           
             self.conn.execute("SELECT * FROM students")
             students = [Student(*row) for row in  self.conn.fetchall()]
             if students:
@@ -103,15 +92,7 @@ class StudentServiceImpl(StudentDAO,Dbconnection):
 
 
 class CourseServiceImpl(CourseDAO,Dbconnection):
-    def __init__(self):
-        server_name = "DESKTOP-0EUUQEO\\SQLEXPRESS"
-        database_name = "SISDB"
-        conn_str = (
-            f"Driver={{SQL Server}};"
-            f"Server={server_name};"
-            f"Database={database_name};"
-            f"Trusted_Connection=yes;"
-        )
+
 
     def add_course(self):
         course_id=int(input("Enter course_id :"))
@@ -120,7 +101,7 @@ class CourseServiceImpl(CourseDAO,Dbconnection):
         credits = int(input("Enter credits :"))
         if not course_name or credits <= 0:
             raise InvalidCourseDataException("Course name is required and credits should be a positive number.")
-        self.conn.cursor()
+      
         self.conn.execute("INSERT INTO courses VALUES (?, ?, ?, ?)",
                             (course_id,course_name,teacher_id,credits))
         self.conn.commit()
@@ -132,7 +113,7 @@ class CourseServiceImpl(CourseDAO,Dbconnection):
         teacher_id = int(input("Enter teacher_id :"))
         credits = int(input("Enter credits :"))
         course_id = int(input("Enter course_id :"))
-        self.conn.cursor()
+       
         self.conn.execute("UPDATE courses SET course_name=?, teacher_id=?, credits=? WHERE course_id=?",
                      (course_name,teacher_id,credits,course_id))
         self.conn.commit()
@@ -143,7 +124,7 @@ class CourseServiceImpl(CourseDAO,Dbconnection):
             course_id = int(input("Enter course_id: "))
             print("Searching for course with ID:", course_id)
 
-            self.conn.cursor()
+            
             self.conn.execute("SELECT * FROM courses WHERE course_id = ?", (course_id,))
             print("SQL query executed successfully")
 
@@ -169,14 +150,14 @@ class CourseServiceImpl(CourseDAO,Dbconnection):
 
     def delete_course(self):
         course_id=int(input("Enter course_id :"))
-        self.conn.cursor()
+       
         self.conn.execute("DELETE FROM courses WHERE course_id= ?", (course_id,))
         self.conn.commit()
         print("course deleted successfully!")
 
     def get_all_courses(self) -> List[Course]:
         try:
-            self.conn.cursor()
+           
             self.conn.execute("SELECT * FROM courses")
             courses = [Course(*row) for row in  self.conn.fetchall()]
             if courses:
@@ -195,23 +176,13 @@ class CourseServiceImpl(CourseDAO,Dbconnection):
 
 
 class EnrollmentServiceImpl(EnrollmentDAO,Dbconnection):
-    def __init__(self):
-        server_name = "DESKTOP-0EUUQEO\\SQLEXPRESS"
-        database_name = "SISDB"
-        conn_str = (
-            f"Driver={{SQL Server}};"
-            f"Server={server_name};"
-            f"Database={database_name};"
-            f"Trusted_Connection=yes;"
-        )
-
     def add_enrollment(self):
         student_id=int(input("Enter student_id :"))
         course_id=int(input("Enter course_id :"))
         enrollment_date=input("Enter enrollment date :")
         if not enrollment_date:
             raise InvalidEnrollmentDataException("Enrollment date is required.")
-        self.conn.cursor()
+      
         self.conn.execute("SELECT * FROM enrollments WHERE student_id = ? AND course_id = ?", (student_id, course_id))
         existing =  self.conn.fetchone()
         if existing:
@@ -227,7 +198,7 @@ class EnrollmentServiceImpl(EnrollmentDAO,Dbconnection):
         course_id=int(input("Enter course_id :"))
         enrollment_date=input("Enter enrollment date :")
         enrollment_id=int(input("Enter enrollment id :"))
-        self.conn.cursor()
+       
         self.conn.execute("UPDATE enrollments SET student_id= ?, course_id=?, enrollment_date=? WHERE enrollment_id=?",
                             (student_id,course_id,enrollment_date,enrollment_id))
         self.conn.commit()
@@ -236,7 +207,7 @@ class EnrollmentServiceImpl(EnrollmentDAO,Dbconnection):
 
     def get_enrollment(self):
         enrollment_id = int(input("Enter enrollment id :"))
-        self.conn.cursor()
+       
         self.conn.execute("SELECT * FROM enrollments WHERE enrollment_id= ?", (enrollment_id,))
         row =  self.conn.fetchone()
         if row:
@@ -251,14 +222,14 @@ class EnrollmentServiceImpl(EnrollmentDAO,Dbconnection):
 
     def delete_enrollment(self):
         enrollment_id=int(input("Enter Enrollment id :"))
-        self.conn.cursor()
+       
         self.conn.execute("DELETE FROM enrollments WHERE enrollment_id= ?", (enrollment_id,))
         self.conn.commit()
         print("enrollment deleted successfully!")
 
     def get_all_enrollments(self) -> List[Enrollment]:
         try:
-            self.conn.cursor()
+          
             self.conn.execute("SELECT * FROM enrollments")
             enrollments = [Enrollment(*row) for row in  self.conn.fetchall()]
             if enrollments:
@@ -277,15 +248,7 @@ class EnrollmentServiceImpl(EnrollmentDAO,Dbconnection):
 
 
 class TeacherServiceImpl(TeacherDAO,Dbconnection):
-    def __init__(self):
-        server_name = "DESKTOP-0EUUQEO\\SQLEXPRESS"
-        database_name = "SISDB"
-        conn_str = (
-            f"Driver={{SQL Server}};"
-            f"Server={server_name};"
-            f"Database={database_name};"
-            f"Trusted_Connection=yes;"
-        )
+    
 
     def add_teacher(self):
         first_name=input("Enter first name :")
@@ -293,7 +256,7 @@ class TeacherServiceImpl(TeacherDAO,Dbconnection):
         email=input("Enter email :")
         if not first_name or not last_name or not email:
             raise InvalidTeacherDataException("First name, last name, and email are required.")
-        self.conn.cursor()
+      
         self.conn.execute("INSERT INTO teacher (first_name, last_name, email) VALUES (?,?, ?)",
                      (first_name,last_name,email))
         self.conn.commit()
@@ -304,7 +267,7 @@ class TeacherServiceImpl(TeacherDAO,Dbconnection):
         last_name=input("Enter last name :")
         email = input("Enter email :")
         teacher_id=int(input("Enter teacher id :"))
-        self.conn.cursor()
+      
         self.conn.execute("UPDATE teacher SET first_name= ?, last_name= ?, email= ? WHERE teacher_id= ?",
                             (first_name,last_name,email,teacher_id))
         self.conn.commit()
@@ -314,7 +277,7 @@ class TeacherServiceImpl(TeacherDAO,Dbconnection):
     def get_teacher(self):
         try:
             teacher_id=int(input("Enter teacher id :"))
-            self.conn.cursor()
+            
             self.conn.execute("SELECT * FROM teacher WHERE teacher_id= ?", (teacher_id,))
             row =  self.conn.fetchone()
             if row:
@@ -335,13 +298,13 @@ class TeacherServiceImpl(TeacherDAO,Dbconnection):
 
     def delete_teacher(self):
         teacher_id=int(input("Enter teacher id :"))
-        self.conn.cursor()
+     
         self.conn.execute("DELETE FROM teacher WHERE teacher_id= ?", (teacher_id,))
         self.conn.commit()
         print("teacher deleted successfully!")
 
     def get_all_teachers(self) -> List[Teacher]:
-        self.conn.cursor()
+        
         self.conn.execute("SELECT * FROM teacher")
         teachers = [Teacher(*row) for row in  self.conn.fetchall()]
         if teachers:
@@ -359,15 +322,7 @@ class TeacherServiceImpl(TeacherDAO,Dbconnection):
 
 
 class PaymentServiceImpl(PaymentDAO,Dbconnection):
-    def __init__(self):
-        server_name = "DESKTOP-0EUUQEO\\SQLEXPRESS"
-        database_name = "SISDB"
-        conn_str = (
-            f"Driver={{SQL Server}};"
-            f"Server={server_name};"
-            f"Database={database_name};"
-            f"Trusted_Connection=yes;"
-        )
+    
 
     def add_payment(self):
         payment_id=int(input("Enter payment id :"))
@@ -380,7 +335,7 @@ class PaymentServiceImpl(PaymentDAO,Dbconnection):
             raise PaymentValidationException("Student ID must be positive")
         if amount <= 0:
             raise PaymentValidationException("Amount must be positive")
-        self.conn.cursor()
+      
         self.conn.execute("INSERT INTO payments VALUES (?, ?, ?, ?)",
                             (payment_id, student_id,amount,payment_date))
         self.conn.commit()
@@ -391,7 +346,7 @@ class PaymentServiceImpl(PaymentDAO,Dbconnection):
         amount=int(input("Enter amount :"))
         payment_date=input("Enter date :")
         payment_id=int(input("Enter payment ID :"))
-        self.conn.cursor()
+       
         self.conn.execute("UPDATE payments SET student_id= ?, amount= ?, payment_date= ? WHERE payment_id=?",
                             (student_id,amount,payment_date,payment_id))
         self.conn.commit()
@@ -400,7 +355,7 @@ class PaymentServiceImpl(PaymentDAO,Dbconnection):
 
     def get_payment(self) -> None:
         payment_id=int(input("Enter payment ID :"))
-        self.conn.cursor()
+     
         self.conn.execute("SELECT * FROM payments WHERE payment_id= ?", (payment_id,))
         row =  self.conn.fetchone()
         if row:
@@ -418,13 +373,13 @@ class PaymentServiceImpl(PaymentDAO,Dbconnection):
 
     def delete_payment(self):
         payment_id=int(input("Enter payment Id :"))
-        self.conn.cursor()
+        
         self.conn.execute("DELETE FROM payments WHERE payment_id= ?", (payment_id,))
         self.conn.commit()
         print("payment deleted successfully!")
 
     def get_all_payments(self) -> List[Payment]:
-        self.conn.cursor()
+       
         self.conn.execute("SELECT * FROM payments")
         payments = [Payment(*row) for row in stmt.fetchall()]
         if payments:
