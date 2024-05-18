@@ -1,11 +1,11 @@
 import pyodbc
-from util.dbconnection import Dbconnection
+from util.dbconn import DBConnection
 from dao.services import *
 from Exception.myexceptions import DuplicateEnrollmentException,CourseNotFoundException,StudentNotFoundException,TeacherNotFoundException,PaymentValidationException,InvalidStudentDataException,InvalidCourseDataException,InvalidEnrollmentDataException,InvalidTeacherDataException,InsufficientFundsException
 from Entity import Course, Enrollment, Teacher, Payment,Student
 
 
-class StudentServiceImpl(StudentDAO,Dbconnection):
+class StudentServiceImpl(StudentDAO,DBConnection):
 
     def add_student(self):
         first_name = input("Enter first name: ")
@@ -45,10 +45,10 @@ class StudentServiceImpl(StudentDAO,Dbconnection):
             print("Searching for student with ID:", student_id)
 
          
-            self.conn.execute("SELECT * FROM students WHERE student_id = ?", (student_id,))
+            self.conn.execute("SELECT * FROM students WHERE student_id = ?", (student_id))
             print("SQL query executed successfully")
 
-            row =  self.conn.fetchone()
+            row =  self.cursor.fetchone()[0]
             if row:
                 print("Student found:", row)
                 student = Student(*row)
@@ -91,7 +91,7 @@ class StudentServiceImpl(StudentDAO,Dbconnection):
             print("Error retrieving students:", str(e))
 
 
-class CourseServiceImpl(CourseDAO,Dbconnection):
+class CourseServiceImpl(CourseDAO,DBConnection):
 
 
     def add_course(self):
@@ -125,10 +125,10 @@ class CourseServiceImpl(CourseDAO,Dbconnection):
             print("Searching for course with ID:", course_id)
 
             
-            self.conn.execute("SELECT * FROM courses WHERE course_id = ?", (course_id,))
+            self.conn.execute("SELECT * FROM courses WHERE course_id = ?", (course_id))
             print("SQL query executed successfully")
 
-            row =  self.conn.fetchone()
+            row =  self.cursor.fetchone()[0]
             if row:
                 course_id, course_name, credits,teacher_id =row
                 print(f"Course ID: {course_id}")
@@ -175,7 +175,7 @@ class CourseServiceImpl(CourseDAO,Dbconnection):
             print("Error retrieving courses:", str(e))
 
 
-class EnrollmentServiceImpl(EnrollmentDAO,Dbconnection):
+class EnrollmentServiceImpl(EnrollmentDAO,DBConnection):
     def add_enrollment(self):
         student_id=int(input("Enter student_id :"))
         course_id=int(input("Enter course_id :"))
@@ -184,7 +184,7 @@ class EnrollmentServiceImpl(EnrollmentDAO,Dbconnection):
             raise InvalidEnrollmentDataException("Enrollment date is required.")
       
         self.conn.execute("SELECT * FROM enrollments WHERE student_id = ? AND course_id = ?", (student_id, course_id))
-        existing =  self.conn.fetchone()
+        existing =  self.cursor.fetchone()[0]
         if existing:
             raise DuplicateEnrollmentException("Student is already enrolled in the course.")
 
@@ -209,7 +209,7 @@ class EnrollmentServiceImpl(EnrollmentDAO,Dbconnection):
         enrollment_id = int(input("Enter enrollment id :"))
        
         self.conn.execute("SELECT * FROM enrollments WHERE enrollment_id= ?", (enrollment_id,))
-        row =  self.conn.fetchone()
+        row =  self.cursor.fetchone()[0]
         if row:
             enrollment_id,student_id,course_id,enrollment_date = row
             print(f"enrollment ID: {enrollment_id}")
@@ -247,7 +247,7 @@ class EnrollmentServiceImpl(EnrollmentDAO,Dbconnection):
             print("Error retrieving students:", str(e))
 
 
-class TeacherServiceImpl(TeacherDAO,Dbconnection):
+class TeacherServiceImpl(TeacherDAO,DBConnection):
     
 
     def add_teacher(self):
@@ -279,7 +279,7 @@ class TeacherServiceImpl(TeacherDAO,Dbconnection):
             teacher_id=int(input("Enter teacher id :"))
             
             self.conn.execute("SELECT * FROM teacher WHERE teacher_id= ?", (teacher_id,))
-            row =  self.conn.fetchone()
+            row =  self.cursor.fetchone()[0]
             if row:
                 teacher_id,first_name,last_name,email = row
                 print(f"teacher_id: {teacher_id}")
@@ -321,7 +321,7 @@ class TeacherServiceImpl(TeacherDAO,Dbconnection):
         return teachers
 
 
-class PaymentServiceImpl(PaymentDAO,Dbconnection):
+class PaymentServiceImpl(PaymentDAO,DBConnection):
     
 
     def add_payment(self):
@@ -357,7 +357,7 @@ class PaymentServiceImpl(PaymentDAO,Dbconnection):
         payment_id=int(input("Enter payment ID :"))
      
         self.conn.execute("SELECT * FROM payments WHERE payment_id= ?", (payment_id,))
-        row =  self.conn.fetchone()
+        row =  self.cursor.fetchone()[0]
         if row:
             payment_id,student_id,amount,payment_date= row
             print(f"payment ID: {payment_id}")
