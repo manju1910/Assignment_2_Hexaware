@@ -9,109 +9,109 @@ from Entity.Payment import Payment
 
 class StudentDAO(ABC):
     @abstractmethod
-    def add_student(self):
+    def Add_student(self):
         pass
 
     @abstractmethod
-    def update_student(self):
+    def Update_student(self):
         pass
 
     @abstractmethod
-    def get_student(self):
+    def Get_student(self):
         pass
 
     @abstractmethod
-    def delete_student(self):
+    def Delete_student(self):
         pass
 
     @abstractmethod
-    def get_all_students(self) -> List[Student]:
+    def Get_all_students(self) -> List[Student]:
         pass
 
 
 class CourseDAO(ABC):
     @abstractmethod
-    def add_course(self):
+    def Add_course(self):
         pass
 
     @abstractmethod
-    def update_course(self):
+    def Update_course(self):
         pass
 
     @abstractmethod
-    def get_course(self):
+    def Get_course(self):
         pass
 
     @abstractmethod
-    def delete_course(self):
+    def Delete_course(self):
         pass
 
     @abstractmethod
-    def get_all_courses(self) -> List[Course]:
+    def Get_all_courses(self) -> List[Course]:
         pass
 
 
 class EnrollmentDAO(ABC):
     @abstractmethod
-    def add_enrollment(self):
+    def Add_enrollment(self):
         pass
 
     @abstractmethod
-    def update_enrollment(self):
+    def Update_enrollment(self):
         pass
 
     @abstractmethod
-    def get_enrollment(self):
+    def Get_enrollment(self):
         pass
 
     @abstractmethod
-    def delete_enrollment(self):
+    def Delete_enrollment(self):
         pass
 
     @abstractmethod
-    def get_all_enrollments(self) -> List[Enrollment]:
+    def Get_all_enrollments(self) -> List[Enrollment]:
         pass
 
 
 class TeacherDAO(ABC):
     @abstractmethod
-    def add_teacher(self):
+    def Add_teacher(self):
         pass
 
     @abstractmethod
-    def update_teacher(self):
+    def Update_teacher(self):
         pass
 
     @abstractmethod
-    def get_teacher(self):
+    def Get_teacher(self):
         pass
 
     @abstractmethod
-    def delete_teacher(self):
+    def Delete_teacher(self):
         pass
 
     @abstractmethod
-    def get_all_teachers(self) -> List[Teacher]:
+    def Get_all_teachers(self) -> List[Teacher]:
         pass
 
 
 class PaymentDAO(ABC):
     @abstractmethod
-    def add_payment(self):
+    def Add_payment(self):
         pass
 
     @abstractmethod
-    def update_payment(self):
+    def Update_payment(self):
         pass
 
     @abstractmethod
-    def get_payment(self):
+    def Get_payment(self):
         pass
 
     @abstractmethod
-    def delete_payment(self):
+    def Delete_payment(self):
         pass
 
     @abstractmethod
-    def get_all_payments(self) -> List[Payment]:
+    def Get_all_payments(self) -> List[Payment]:
         pass

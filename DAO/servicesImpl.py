@@ -7,7 +7,7 @@ from Entity import Course, Enrollment, Teacher, Payment,Student
 
 class StudentServiceImpl(StudentDAO,DBConnection):
 
-    def add_student(self):
+    def Add_student(self):
         first_name = input("Enter first name: ")
         last_name = input("Enter last name: ")
         date_of_birth = input("Enter date of birth (YYYY-MM-DD): ")
@@ -23,7 +23,7 @@ class StudentServiceImpl(StudentDAO,DBConnection):
         self.conn.commit()
         print("student added successfully!")
 
-    def update_student(self):
+    def Update_student(self):
         student_id = input("Enter the student ID to update: ")
         first_name = input("Enter updated first name: ")
         last_name = input("Enter updated last name: ")
@@ -39,7 +39,7 @@ class StudentServiceImpl(StudentDAO,DBConnection):
         self.conn.commit()
         print("student updated successfully!")
 
-    def get_student(self):
+    def Get_student(self):
         try:
             student_id = int(input("Enter student_id: "))
             print("Searching for student with ID:", student_id)
@@ -62,14 +62,14 @@ class StudentServiceImpl(StudentDAO,DBConnection):
             print("Error retrieving student:", e)
             return None
 
-    def delete_student(self):
+    def Delete_student(self):
         student_id=int(input("Enter student_id :"))
 
-        self.conn.execute("DELETE FROM students WHERE student_id= ? ", (student_id,))
+        self.conn.execute("DELETE FROM students WHERE student_id= ? ", (student_id))
         self.conn.commit()
         print("student deleted successfully!")
 
-    def get_all_students(self):
+    def Get_all_students(self):
         try:
            
             self.conn.execute("SELECT * FROM students")
@@ -94,7 +94,7 @@ class StudentServiceImpl(StudentDAO,DBConnection):
 class CourseServiceImpl(CourseDAO,DBConnection):
 
 
-    def add_course(self):
+    def Add_course(self):
         course_id=int(input("Enter course_id :"))
         course_name=input("Enter course name :")
         teacher_id=int(input("Enter teacher_id :"))
@@ -108,7 +108,7 @@ class CourseServiceImpl(CourseDAO,DBConnection):
         print("course added successfully!")
 
 
-    def update_course(self):
+    def Update_course(self):
         course_name = input("Enter course name :")
         teacher_id = int(input("Enter teacher_id :"))
         credits = int(input("Enter credits :"))
@@ -119,7 +119,7 @@ class CourseServiceImpl(CourseDAO,DBConnection):
         self.conn.commit()
         print("course updated successfully!")
 
-    def get_course(self):
+    def Get_course(self):
         try:
             course_id = int(input("Enter course_id: "))
             print("Searching for course with ID:", course_id)
@@ -148,14 +148,14 @@ class CourseServiceImpl(CourseDAO,DBConnection):
 
 
 
-    def delete_course(self):
+    def Delete_course(self):
         course_id=int(input("Enter course_id :"))
        
         self.conn.execute("DELETE FROM courses WHERE course_id= ?", (course_id,))
         self.conn.commit()
         print("course deleted successfully!")
 
-    def get_all_courses(self) -> List[Course]:
+    def Get_all_courses(self) -> List[Course]:
         try:
            
             self.conn.execute("SELECT * FROM courses")
@@ -176,7 +176,7 @@ class CourseServiceImpl(CourseDAO,DBConnection):
 
 
 class EnrollmentServiceImpl(EnrollmentDAO,DBConnection):
-    def add_enrollment(self):
+    def Add_enrollment(self):
         student_id=int(input("Enter student_id :"))
         course_id=int(input("Enter course_id :"))
         enrollment_date=input("Enter enrollment date :")
@@ -193,7 +193,7 @@ class EnrollmentServiceImpl(EnrollmentDAO,DBConnection):
         self.conn.commit()
         print("enrollment added successfully!")
 
-    def update_enrollment(self):
+    def Update_enrollment(self):
         student_id=int(input("Enter student_id :"))
         course_id=int(input("Enter course_id :"))
         enrollment_date=input("Enter enrollment date :")
@@ -205,10 +205,10 @@ class EnrollmentServiceImpl(EnrollmentDAO,DBConnection):
         print("enrollment updated successfully!")
 
 
-    def get_enrollment(self):
+    def Get_enrollment(self):
         enrollment_id = int(input("Enter enrollment id :"))
        
-        self.conn.execute("SELECT * FROM enrollments WHERE enrollment_id= ?", (enrollment_id,))
+        self.conn.execute("SELECT * FROM enrollments WHERE enrollment_id= ?", (enrollment_id))
         row =  self.cursor.fetchone()[0]
         if row:
             enrollment_id,student_id,course_id,enrollment_date = row
@@ -220,14 +220,14 @@ class EnrollmentServiceImpl(EnrollmentDAO,DBConnection):
             print("No course found with ID:", enrollment_id)
             return None
 
-    def delete_enrollment(self):
+    def Delete_enrollment(self):
         enrollment_id=int(input("Enter Enrollment id :"))
        
         self.conn.execute("DELETE FROM enrollments WHERE enrollment_id= ?", (enrollment_id,))
         self.conn.commit()
         print("enrollment deleted successfully!")
 
-    def get_all_enrollments(self) -> List[Enrollment]:
+    def Get_all_enrollments(self) -> List[Enrollment]:
         try:
           
             self.conn.execute("SELECT * FROM enrollments")
@@ -235,7 +235,7 @@ class EnrollmentServiceImpl(EnrollmentDAO,DBConnection):
             if enrollments:
                 print("All enrollments:")
                 for enrollment in enrollments:
-                    print(f"enrollment ID: {enrollment.get_enrollment_id()}")
+                    print(f"enrollment ID: {enrollment.Get_enrollment_id()}")
                     print(f"student ID: {enrollment.student_id}")
                     print(f"Course Id: {enrollment.course_id}")
                     print(f"enrollment_date: {enrollment.enrollment_date}")
@@ -250,7 +250,7 @@ class EnrollmentServiceImpl(EnrollmentDAO,DBConnection):
 class TeacherServiceImpl(TeacherDAO,DBConnection):
     
 
-    def add_teacher(self):
+    def Add_teacher(self):
         first_name=input("Enter first name :")
         last_name=input("Enter last name :")
         email=input("Enter email :")
@@ -262,7 +262,7 @@ class TeacherServiceImpl(TeacherDAO,DBConnection):
         self.conn.commit()
         print("teacher added successfully!")
 
-    def update_teacher(self):
+    def Update_teacher(self):
         first_name=input("Enter first name :")
         last_name=input("Enter last name :")
         email = input("Enter email :")
@@ -274,7 +274,7 @@ class TeacherServiceImpl(TeacherDAO,DBConnection):
         print("teacher updated successfully!")
 
 
-    def get_teacher(self):
+    def Get_teacher(self):
         try:
             teacher_id=int(input("Enter teacher id :"))
             
@@ -296,14 +296,14 @@ class TeacherServiceImpl(TeacherDAO,DBConnection):
             print("Error retrieving teacher:", e)
             return None
 
-    def delete_teacher(self):
+    def Delete_teacher(self):
         teacher_id=int(input("Enter teacher id :"))
      
         self.conn.execute("DELETE FROM teacher WHERE teacher_id= ?", (teacher_id,))
         self.conn.commit()
         print("teacher deleted successfully!")
 
-    def get_all_teachers(self) -> List[Teacher]:
+    def Get_all_teachers(self) -> List[Teacher]:
         
         self.conn.execute("SELECT * FROM teacher")
         teachers = [Teacher(*row) for row in  self.conn.fetchall()]
@@ -324,7 +324,7 @@ class TeacherServiceImpl(TeacherDAO,DBConnection):
 class PaymentServiceImpl(PaymentDAO,DBConnection):
     
 
-    def add_payment(self):
+    def Add_payment(self):
         payment_id=int(input("Enter payment id :"))
         student_id=int(input("Enter student id :"))
         amount=int(input("Enter amount :"))
@@ -341,7 +341,7 @@ class PaymentServiceImpl(PaymentDAO,DBConnection):
         self.conn.commit()
         print("payment added successfully!")
 
-    def update_payment(self):
+    def Update_payment(self):
         student_id=int(input("Enter student_id :"))
         amount=int(input("Enter amount :"))
         payment_date=input("Enter date :")
@@ -353,10 +353,10 @@ class PaymentServiceImpl(PaymentDAO,DBConnection):
         print("payment updated successfully!")
 
 
-    def get_payment(self) -> None:
+    def Get_payment(self) -> None:
         payment_id=int(input("Enter payment ID :"))
      
-        self.conn.execute("SELECT * FROM payments WHERE payment_id= ?", (payment_id,))
+        self.conn.execute("SELECT * FROM payments WHERE payment_id= ?", (payment_id))
         row =  self.cursor.fetchone()[0]
         if row:
             payment_id,student_id,amount,payment_date= row
@@ -371,24 +371,24 @@ class PaymentServiceImpl(PaymentDAO,DBConnection):
 
 
 
-    def delete_payment(self):
+    def Delete_payment(self):
         payment_id=int(input("Enter payment Id :"))
         
-        self.conn.execute("DELETE FROM payments WHERE payment_id= ?", (payment_id,))
+        self.conn.execute("DELETE FROM payments WHERE payment_id= ?", (payment_id))
         self.conn.commit()
         print("payment deleted successfully!")
 
-    def get_all_payments(self) -> List[Payment]:
+    def Get_all_payments(self) -> List[Payment]:
        
         self.conn.execute("SELECT * FROM payments")
-        payments = [Payment(*row) for row in stmt.fetchall()]
+        payments = [Payment(*row) for row in self.cursor.fetchall()]
         if payments:
             print("All courses:")
             for payment in payments:
-                print(f"payment ID: {payment.get_payment_id()}")
-                print(f"student_id: {payment.get_student_id()}")
-                print(f"amount: {payment.get_amount()}")
-                print(f"payment_date: {payment.get_payment_date()}")
+                print(f"payment ID: {payment.Get_payment_id()}")
+                print(f"student_id: {payment.Get_student_id()}")
+                print(f"amount: {payment.Get_amount()}")
+                print(f"payment_date: {payment.Get_payment_date()}")
                 print()
             print("All payments retrieved successfully!")
         else:

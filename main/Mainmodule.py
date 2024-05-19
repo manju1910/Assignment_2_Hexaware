@@ -36,15 +36,15 @@ class Main:
                             choice_1 = int(input("Enter your Choice: "))
                             if choice_1 in range(1, 7):
                                 if choice_1 == 1:
-                                    student_service.add_student()
+                                    student_service.Add_student()
                                 elif choice_1 == 2:
-                                    student_service.update_student()
+                                    student_service.Update_student()
                                 elif choice_1 == 3:
-                                    student_service.get_student()
+                                    student_service.Get_student()
                                 elif choice_1 == 4:
-                                    student_service.delete_student()
+                                    student_service.Delete_student()
                                 elif choice_1 == 5:
-                                    student_service.get_all_students()
+                                    student_service.Get_all_students()
                                 else:
                                     break
                             else:
@@ -55,15 +55,15 @@ class Main:
                             choice_2 = int(input("Enter your Choice: "))
                             if choice_2 in range(1, 7):
                                 if choice_2 == 1:
-                                    course_service.add_course()
+                                    course_service.Add_course()
                                 elif choice_2 == 2:
-                                    course_service.update_course()
+                                    course_service.Update_course()
                                 elif choice_2 == 3:
-                                    course_service.get_course()
+                                    course_service.Get_course()
                                 elif choice_2 == 4:
-                                    course_service.delete_course()
+                                    course_service.Delete_course()
                                 elif choice_2 == 5:
-                                    course_service.get_all_courses()
+                                    course_service.Get_all_courses()
                                 else:
                                     break
                             else:
@@ -74,15 +74,15 @@ class Main:
                             choice_3 = int(input("Enter your Choice: "))
                             if choice_3 in range(1, 7):
                                 if choice_3 == 1:
-                                    enrollment_service.add_enrollment()
+                                    enrollment_service.Add_enrollment()
                                 elif choice_3 == 2:
-                                    enrollment_service.update_enrollment()
+                                    enrollment_service.Update_enrollment()
                                 elif choice_3 == 3:
-                                    enrollment_service.get_enrollment()
+                                    enrollment_service.Get_enrollment()
                                 elif choice_3 == 4:
-                                    enrollment_service.delete_enrollment()
+                                    enrollment_service.Delete_enrollment()
                                 elif choice_3 == 5:
-                                    enrollment_service.get_all_enrollments()
+                                    enrollment_service.Get_all_enrollments()
                                 else:
                                     break
                             else:
@@ -93,15 +93,15 @@ class Main:
                             choice_4 = int(input("Enter your Choice: "))
                             if choice_4 in range(1, 7):
                                 if choice_4 == 1:
-                                    teacher_service.add_teacher()
+                                    teacher_service.Add_teacher()
                                 elif choice_4 == 2:
-                                    teacher_service.update_teacher()
+                                    teacher_service.Update_teacher()
                                 elif choice_4 == 3:
-                                    teacher_service.get_teacher()
+                                    teacher_service.Get_teacher()
                                 elif choice_4 == 4:
-                                    teacher_service.delete_teacher()
+                                    teacher_service.Delete_teacher()
                                 elif choice_4 == 5:
-                                    teacher_service.get_all_teachers()
+                                    teacher_service.Get_all_teachers()
                                 else:
                                     break
                             else:
@@ -112,15 +112,15 @@ class Main:
                             choice_5 = int(input("Enter your Choice: "))
                             if choice_5 in range(1, 7):
                                 if choice_5 == 1:
-                                    payment_service.add_payment()
+                                    payment_service.Add_payment()
                                 elif choice_5 == 2:
-                                    payment_service.update_payment()
+                                    payment_service.Update_payment()
                                 elif choice_5 == 3:
-                                    payment_service.get_payment()
+                                    payment_service.Get_payment()
                                 elif choice_5 == 4:
-                                    payment_service.delete_payment()
+                                    payment_service.Delete_payment()
                                 elif choice_5 == 5:
-                                    payment_service.get_all_payments()
+                                    payment_service.Get_all_payments()
                                 else:
                                     break
                             else:

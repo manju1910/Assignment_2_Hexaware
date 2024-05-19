@@ -7,10 +7,10 @@ class Course:
 
         self.enrollments = []
 
-    def get_course_id(self):
+    def Get_course_id(self):
         return self.__course_id
 
-    def get_course_name(self):
+    def Get_course_name(self):
         return self.__course_name
 
 
